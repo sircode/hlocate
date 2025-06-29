@@ -1,15 +1,31 @@
 #!/bin/bash
 
-# clocate - "highlight locate"
+# hlocate - highlight locate
 # Author: https://github.com/sircode
 # License: MIT
 
+# Handle hlocate's own help
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+    echo "Usage: hlocate [plocate options] searchterm"
+    echo
+    echo "hlocate wraps plocate and highlights the search term in color."
+    echo
+    echo "Examples:"
+    echo "  hlocate word"
+    echo "  hlocate -b word"
+    exit 0
+fi
+
 if [ $# -eq 0 ]; then
-    echo "Usage: hlocate searchterm [additional plocate options]"
+    echo "Usage: hlocate [plocate options] searchterm"
     exit 1
 fi
 
-SEARCH="$1"
-shift
+# Grab the last argument as the search term
+SEARCH="${@: -1}"
 
-plocate "$@" "$SEARCH" | grep --color=always -i "$SEARCH"
+# All preceding arguments (if any) are plocate options
+OPTIONS=("${@:1:$(($#-1))}")
+
+# Run plocate with options and search term
+plocate "${OPTIONS[@]}" "$SEARCH" | grep --color=always -i -- "$SEARCH"
