@@ -4,15 +4,10 @@
 # Author: https://github.com/sircode
 # License: MIT
 
-# Handle hlocate's own help
-if [[ "$1" == "--help" || "$1" == "-h" ]]; then
-    echo "Usage: hlocate [plocate options] searchterm"
-    echo
-    echo "hlocate wraps plocate and highlights the search term in color."
-    echo
-    echo "Examples:"
-    echo "  hlocate word"
-    echo "  hlocate -b word"
+# If --help or -h is requested as the only argument,
+# pass it through directly to plocate without grep
+if [[ "$1" == "--help" || "$1" == "-h" ]] && [ $# -eq 1 ]; then
+    plocate --help
     exit 0
 fi
 
