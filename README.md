@@ -1,7 +1,7 @@
 
 # hlocate
 
-A tiny shell script to run `plocate` (or `locate`) and highlight search terms in color.
+A tiny shell script to run `plocate` (or `locate`) and 🟥**highlight** search terms in color.
 
 ## Usage
 
