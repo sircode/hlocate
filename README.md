@@ -15,7 +15,7 @@ Example:
 hlocate searchterm
 ```
 
-```bash
+```text
 hlocate --help
 
 options same as plocate:
