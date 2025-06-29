@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ $# -eq 0 ]; then
+    echo "Usage: hlocate searchterm [additional plocate options]"
+    exit 1
+fi
+
+SEARCH="$1"
+shift
+
+plocate "$@" "$SEARCH" | grep --color=always -i "$SEARCH"
